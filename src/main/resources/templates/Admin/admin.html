@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Navigation Page</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(to bottom right, #1c1c1c, #121212);
+      color: #ffffff;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100vh;
+      justify-content: center;
+      position: relative;
+    }
+
+    h2 {
+      color: #e0e0e0;
+      margin-bottom: 20px;
+    }
+
+    form {
+      margin: 10px 0;
+    }
+
+    button {
+      background-color: #007acc;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 15px 25px;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #005a9e;
+      transform: scale(1.05);
+    }
+
+    .logout-button {
+      background-color: #e74c3c;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      padding: 10px 15px;
+      font-size: 1em;
+      text-align: center;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    .logout-button:hover {
+      background-color: #c0392b;
+      transform: translateY(-2px);
+    }
+
+    .separator {
+      width: 80%;
+      border: none;
+      border-top: 1px solid #555;
+      margin: 20px 0;
+    }
+
+
+    /* User Management Button */
+    .user-management-button {
+      background: linear-gradient(to right, #6a1b9a, #9c27b0); /* Beautiful dark purple gradient */
+      color: white; /* Text color */
+      border: none; /* No border */
+      border-radius: 8px; /* Rounded corners */
+      padding: 15px 25px; /* Padding */
+      font-size: 16px; /* Font size */
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Soft shadow */
+      transition: background 0.3s, transform 0.2s; /* Transition effects */
+    }
+
+    .user-management-button:hover {
+      background: linear-gradient(to right, #9c27b0, #ab47bc); /* Lighter gradient on hover */
+      transform: translateY(-2px); /* Slight lift effect */
+    }
+
+    /* General Style for Other Buttons */
+    .version-controller-button {
+      background: linear-gradient(to right, #007acc, #005a9e); /* Blue gradient */
+      color: white; /* Text color */
+      border: none; /* No border */
+      border-radius: 8px; /* Rounded corners */
+      padding: 15px 25px; /* Padding */
+      font-size: 16px; /* Font size */
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Soft shadow */
+      transition: background 0.3s, transform 0.2s; /* Transition effects */
+    }
+
+    .version-controller-button:hover {
+      background: linear-gradient(to right, #005a9e, #004b8d); /* Lighter gradient on hover */
+      transform: translateY(-2px); /* Slight lift effect */
+    }
+
+
+
+
+  </style>
+</head>
+<body>
+
+<a href="/logout">
+  <button class="logout-button">Logout</button>
+</a>
+
+<h2>Select an Action</h2>
+
+<hr class="separator">
+
+<form action="/admin/user-management" method="get">
+  <button type="submit" class="user-management-button">Go to The User Management</button>
+</form>
+
+<hr class="separator">
+
+<form action="/editor/branch-editor" method="get">
+  <button type="submit" class="version-controller-button">Go to Version Controller as Editor</button>
+</form>
+
+<form action="/viewer/branch-viewer" method="get">
+  <button type="submit" class="version-controller-button">Go to Version Controller as Viewer</button>
+</form>
+
+</body>
+</html>

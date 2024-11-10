@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Details</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1.5.1/dist/sockjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/stompjs@2.3.3/lib/stomp.min.js"></script>
+    <script src="/JavaScript/edit-file.js" defer></script>
+    <script src="/JavaScript/EditorJS/file-editor.js" defer></script>
+    <script src="/JavaScript/runCode.js" defer></script>
+
+    <style>
+        body {
+            background-color: #1e1e1e;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: row;
+        }
+
+        .content {
+            flex: 1;
+            margin-right: 20px;
+        }
+
+        .right-section {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        h2, h3, h4 {
+            color: #e0e0e0;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #424242;
+            border-radius: 4px;
+            background-color: #1e1e1e;
+            color: #ffffff;
+        }
+
+        textarea {
+            height: 600px;
+            resize: vertical;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 16px;
+            border: none;
+            background-color: transparent;
+            color: #ffffff;
+            outline: none;
+        }
+
+        #commentContent {
+            height: 100px;
+            resize: vertical;
+        }
+
+        textarea::placeholder {
+            color: #888;
+            opacity: 1;
+        }
+
+        button {
+            background-color: #6200ea;
+            color: #ffffff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-right: 10px;
+        }
+
+        button:hover {
+            background-color: #3700b3;
+        }
+
+        .log-container {
+            width: 250px;
+            height: 150px;
+            background-color: #1e1e1e;
+            border: 1px solid #424242;
+            border-radius: 4px;
+            padding: 10px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+
+        #output {
+            background-color: #1e1e1e;
+            border: 1px solid #424242;
+            padding: 10px;
+            border-radius: 4px;
+            overflow: auto;
+            white-space: pre-wrap;
+            margin-top: 20px;
+        }
+
+        #versionList, #commentList {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #versionList li, #commentList li {
+            background-color: #333;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+<div class="content">
+    <h2>Edit File</h2>
+    <div>
+        <label for="fileName">File Name:</label>
+        <span id="fileNameDisplay" th:text="${fileName}">[File Name]</span>
+    </div>
+
+    <p id="loggedInUser">Logged in as: <span id="username" th:text="${username}">[Username]</span></p>
+
+    <div>
+        <label for="content">Content:</label>
+        <textarea id="content" name="content" placeholder="Start coding here..." required></textarea>
+    </div>
+    <div>
+        <div style="display: flex; align-items: center;">
+            <button id="updateButton">Update File</button>
+            <button id="runButton">Run</button>
+        </div>
+    </div>
+
+    <pre id="output"></pre>
+
+    <span id="languageType" style="display:none" th:text="${file.languageType}"></span>
+
+    <input type="hidden" id="branchId" th:value="${branchId}"/>
+
+    <div>
+        <button id="loadDashboardBtn">Load Dashboard to Cache</button>
+    </div>
+
+    <h3>Version History</h3>
+    <ul id="versionList">
+    </ul>
+</div>
+
+<div class="right-section">
+    <div>
+        <h3>Log</h3>
+        <div class="log-container">
+            <pre id="log"></pre>
+        </div>
+    </div>
+
+    <h4>Add a Comment</h4>
+    <div>
+        <label for="lineNumber">Line Number:</label>
+        <input type="number" id="lineNumber" name="lineNumber" min="1" required>
+    </div>
+    <div>
+        <label for="commentContent">Comment:</label>
+        <textarea id="commentContent" name="commentContent" required></textarea>
+    </div>
+    <div>
+        <button id="addCommentButton">Add Comment</button>
+    </div>
+
+    <h3>Comments</h3>
+    <ul id="commentList">
+    </ul>
+</div>
+
+<div id="warningArea" style="color: red; font-weight: bold; margin-top: 10px;"></div>
+
+</body>
+</html>

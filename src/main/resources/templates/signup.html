@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signup</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(to bottom right, #1c1c1c, #121212);
+      color: #ffffff;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100vh;
+      justify-content: center;
+    }
+
+    h1 {
+      color: #e0e0e0;
+      margin-bottom: 20px;
+    }
+
+    .signup-container {
+      background-color: #1e1e1e;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+      width: 350px;
+      text-align: center;
+    }
+
+    .signup-container label {
+      display: block;
+      margin: 10px 0 5px;
+      text-align: left;
+    }
+
+    .signup-container input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #007acc;
+      background-color: #252526;
+      color: #ffffff;
+      margin-bottom: 15px;
+      transition: border 0.3s;
+    }
+
+    .signup-container input:focus {
+      border-color: #005a9e;
+      outline: none;
+    }
+
+    .signup-container button {
+      background-color: #007acc;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 10px;
+      cursor: pointer;
+      width: 100%;
+      transition: background 0.3s, transform 0.2s;
+      margin-top: 10px;
+    }
+
+    .signup-container button:hover {
+      background-color: #005a9e;
+      transform: scale(1.05);
+    }
+
+    .login-link {
+      margin-top: 15px;
+      color: #ffffff;
+    }
+
+    .login-link a {
+      color: #007acc;
+      text-decoration: none;
+    }
+
+    .login-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+<h1>Signup</h1>
+<div class="signup-container">
+  <form action="/signup" method="POST">
+    <input type="hidden" name="_csrf" value="${_csrf.token}">
+    <div>
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required>
+    </div>
+    <div>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+    </div>
+    <div>
+      <button type="submit">Signup</button>
+    </div>
+  </form>
+</div>
+<p class="login-link">Already have an account? <a href="/login">Login here</a></p>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom right, #1c1c1c, #121212);
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            justify-content: center;
+        }
+
+        h2 {
+            color: #e0e0e0;
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin: 10px 0;
+        }
+
+        .login-container {
+            background-color: #1e1e1e;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            width: 350px;
+            text-align: center;
+        }
+
+        .login-container label {
+            display: block;
+            margin: 10px 0 5px;
+            text-align: left;
+        }
+
+        .login-container input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #007acc;
+            background-color: #252526;
+            color: #ffffff;
+            margin-bottom: 15px;
+            transition: border 0.3s;
+        }
+
+        .login-container input:focus {
+            border-color: #005a9e;
+            outline: none;
+        }
+
+        .login-container button {
+            background-color: #007acc;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 10px;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.3s, transform 0.2s;
+            margin-top: 10px;
+        }
+
+        .login-container button:hover {
+            background-color: #005a9e;
+            transform: scale(1.05);
+        }
+
+        .oauth-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #333;
+            border-radius: 6px;
+            padding: 10px;
+            margin: 10px 0;
+            color: #ffffff;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .oauth-link:hover {
+            background-color: #444;
+        }
+
+        .oauth-icon {
+            width: 20px;
+            margin-right: 8px;
+        }
+
+        .signup-link {
+            margin-top: 15px;
+            color: #ffffff;
+        }
+
+        .signup-link a {
+            color: #007acc;
+            text-decoration: none;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<h2>Login to Your Account</h2>
+
+<p th:if="${success}" th:text="${success}"></p>
+<p th:if="${param.error}">Invalid username or password.</p>
+
+<div class="login-container">
+    <a class="oauth-link" href="/oauth2/authorization/github">
+        <img class="oauth-icon" src="https://img.icons8.com/ios-filled/50/ffffff/github.png" alt="GitHub Icon"/>
+        Login with GitHub
+    </a>
+
+    <a class="oauth-link" href="/oauth2/authorization/google">
+        <img class="oauth-icon" src="https://img.icons8.com/ios-filled/50/ffffff/google-logo.png" alt="Google Icon"/>
+        Login with Google
+    </a>
+
+    <a class="oauth-link" href="/oauth2/authorization/facebook">
+        <img class="oauth-icon" src="https://img.icons8.com/ios-filled/50/ffffff/facebook-new.png" alt="Facebook Icon"/>
+        Login with Facebook
+    </a>
+
+    <h3>Or use your username and password</h3>
+    <form action="/login" method="post">
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <div>
+            <button type="submit">Login</button>
+        </div>
+    </form>
+</div>
+
+<p class="signup-link">Don't have an account? <a href="/signup">Sign up here</a></p>
+</body>
+</html>
